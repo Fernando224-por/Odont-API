@@ -17,6 +17,7 @@ export const newUser = async (req, res) => {
     console.log(newUser)
     res.json(newUser)
   } catch (err) {
+    console.log(err)
     return res.status(500).json({
       message: err.message
     })
@@ -28,9 +29,51 @@ export const getAllUsers = async (req, res) => {
     const users = await prisma.user.findMany()
     console.log(users)
     res.json(users)
-  } catch (error) {
+  } catch (err) {
+    console.log(err)
     return res.status(500).json({
       message: 'something goes wrong'
+    })
+  }
+}
+
+export const getOneUser = async (req, res) => {
+  try {
+    const identifier = Number(req.params.id)
+    const user = await prisma.user.findUnique({
+      where: {
+        idUser: identifier
+      }
+    })
+    res.json({
+      name: user.nameUser,
+      email: user.emailUser
+    })
+  } catch (err) {
+    console.log(err)
+    return res.status(500).json({
+      message: 'something goes wrong'
+    })
+  }
+}
+
+export const deleteUser = async (req, res) => {
+  try {
+    const identifier = Number(req.params.id)
+    const oldUser = await prisma.user.delete({
+      where: {
+        idUser: identifier
+      }
+    })
+    console.log(oldUser)
+    res.json({
+      name: oldUser.nameUser,
+      email: oldUser.emailUser
+    })
+    res.json(oldUser)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'someting goes wrong'
     })
   }
 }
