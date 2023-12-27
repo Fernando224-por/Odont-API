@@ -7,9 +7,6 @@ export const newUserSchema = z.object({
   name: z.string({
     required_error: 'Name is Required'
   }),
-  phone: z.number({
-    required_error: 'Phone are required'
-  }),
   email: z.string({
     required_error: 'Email is required'
   }).email({
