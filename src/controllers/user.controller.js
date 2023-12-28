@@ -80,3 +80,36 @@ export const deleteUser = async (req, res) => {
     })
   }
 }
+
+export const updateUser = async (req, res) => {
+  try {
+    const test = String(req.params.id)
+    const userFound = await prisma.user.findFirst({
+      where: {
+        idUser: test
+      }
+    })
+    if (!userFound) {
+      return res.status(404).json({
+        message: 'User not found'
+      })
+    }
+    const userUpdate = await prisma.user.update({
+      where: {
+        idUser: test
+      },
+      data: {
+        nameUser: req.body.name,
+        emailUser: req.body.email,
+        phoneUser: req.body.phone
+      }
+    })
+    console.log(userUpdate)
+    res.json(userUpdate)
+  } catch (error) {
+    console.log(error)
+    return res.status(500).json({
+      message: 'something goes wrong'
+    })
+  }
+}
