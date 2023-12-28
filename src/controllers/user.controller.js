@@ -1,14 +1,17 @@
 import { prisma } from '../db.js'
 import bcrypt from 'bcryptjs'
+import { v4 as uuid4 } from 'uuid'
 
 export const newUser = async (req, res) => {
   try {
+    const identifier = uuid4()
     const { numDocument, name, phone, email, password } = req.body
     const hash = await bcrypt.hash(password, 16)
     const newUser = await prisma.user.create({
       data: {
-        idUser: numDocument,
+        idUser: identifier,
         nameUser: name,
+        docUser: numDocument,
         phoneUser: phone,
         emailUser: email,
         passwordUser: hash
@@ -39,7 +42,7 @@ export const getAllUsers = async (req, res) => {
 
 export const getOneUser = async (req, res) => {
   try {
-    const identifier = Number(req.params.id)
+    const identifier = String(req.params.id)
     const user = await prisma.user.findUnique({
       where: {
         idUser: identifier
@@ -59,7 +62,7 @@ export const getOneUser = async (req, res) => {
 
 export const deleteUser = async (req, res) => {
   try {
-    const identifier = Number(req.params.id)
+    const identifier = String(req.params.id)
     const oldUser = await prisma.user.delete({
       where: {
         idUser: identifier
@@ -68,12 +71,12 @@ export const deleteUser = async (req, res) => {
     console.log(oldUser)
     res.json({
       name: oldUser.nameUser,
-      email: oldUser.emailUser
+      email: oldUser.emailUser,
+      phone: oldUser.phoneUser
     })
-    res.json(oldUser)
   } catch (error) {
     return res.status(500).json({
-      message: 'someting goes wrong'
+      message: 'something goes wrong'
     })
   }
 }
