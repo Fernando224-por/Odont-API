@@ -3,21 +3,20 @@ import bcrypt from 'bcryptjs'
 import { v4 as uuid4 } from 'uuid'
 
 export const newUser = async (req, res) => {
+  const { numDocument, name, phone, email, password } = req.body
   try {
     const identifier = uuid4()
-    const { numDocument, name, phone, email, password } = req.body
-    const hash = await bcrypt.hash(password, 16)
+    const hash = await bcrypt.hash(password, 10)
     const newUser = await prisma.user.create({
       data: {
         idUser: identifier,
-        nameUser: name,
         docUser: numDocument,
+        nameUser: name,
         phoneUser: phone,
         emailUser: email,
         passwordUser: hash
       }
     })
-    console.log(newUser)
     res.json(newUser)
   } catch (err) {
     console.log(err)
@@ -30,7 +29,6 @@ export const newUser = async (req, res) => {
 export const getAllUsers = async (req, res) => {
   try {
     const users = await prisma.user.findMany()
-    console.log(users)
     res.json(users)
   } catch (err) {
     console.log(err)
@@ -104,7 +102,6 @@ export const updateUser = async (req, res) => {
         phoneUser: req.body.phone
       }
     })
-    console.log(userUpdate)
     res.json(userUpdate)
   } catch (error) {
     console.log(error)

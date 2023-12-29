@@ -3,9 +3,16 @@ import { z } from 'zod'
 export const newUserSchema = z.object({
   numDocument: z.number({
     required_error: 'Number document are required'
+  }).max(10, {
+    message: 'must have 10 characters'
   }),
   name: z.string({
     required_error: 'Name is Required'
+  }),
+  phone: z.string({
+    required_error: 'Phone is required'
+  }).max(10, {
+    message: 'must have 10 characters'
   }),
   email: z.string({
     required_error: 'Email is required'

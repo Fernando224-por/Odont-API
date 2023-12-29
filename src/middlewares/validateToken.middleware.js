@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { JWT_PASS } from '../config.js'
+import { JWT_KEY } from '../config.js'
 
 export const authRequired = (req, res, next) => {
   try {
@@ -9,7 +9,7 @@ export const authRequired = (req, res, next) => {
         message: 'No token, authorization denied'
       })
     }
-    jwt.verify(token, JWT_PASS, (error, user) => {
+    jwt.verify(token, JWT_KEY, (error, user) => {
       if (error) {
         return res.status(401).json({
           message: 'Token is not valid'
