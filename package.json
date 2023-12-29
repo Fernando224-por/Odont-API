@@ -12,9 +12,11 @@
   "license": "ISC",
   "devDependencies": {
     "dotenv": "^16.3.1",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.2",
     "prisma": "^5.7.1",
-    "standard": "^17.1.0"
+    "standard": "^17.1.0",
+    "supertest": "^6.3.3"
   },
   "dependencies": {
     "@prisma/client": "^5.7.1",
