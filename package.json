@@ -26,7 +26,6 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
-    "mysql2": "^3.6.5",
     "uuid": "^9.0.1",
     "zod": "^3.22.4"
   },
@@ -35,7 +34,7 @@
       "standard"
     ]
   },
-  "jest" : {
+  "jest": {
     "testTimeout": 10000
   }
 }
