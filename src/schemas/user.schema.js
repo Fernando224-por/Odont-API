@@ -3,7 +3,7 @@ import { z } from 'zod'
 export const newUserSchema = z.object({
   numDocument: z.number({
     required_error: 'Number document are required'
-  }).max(10, {
+  }).min(10, {
     message: 'must have 10 characters'
   }),
   name: z.string({

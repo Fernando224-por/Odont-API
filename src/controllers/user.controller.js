@@ -66,7 +66,6 @@ export const deleteUser = async (req, res) => {
         idUser: identifier
       }
     })
-    console.log(oldUser)
     res.json({
       name: oldUser.nameUser,
       email: oldUser.emailUser,

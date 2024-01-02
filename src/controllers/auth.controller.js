@@ -5,7 +5,7 @@ import { createAccessToken } from '../libs/jwt.js'
 export const logIn = async (req, res) => {
   const { email, password } = req.body
   try {
-    const userFound = await prisma.user.findFirst({
+    const userFound = await prisma.user.findUnique({
       where: {
         emailUser: email
       }
