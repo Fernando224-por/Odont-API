@@ -16,8 +16,8 @@ describe('test API user Route', () => {
   })
   test('GET for "/oneUser/:id" route', async () => {
     const res = await request(app).get('/api/oneUser/:id').send()
-    expect(res.body.name).toEqual('<replace this to BD information>')
-    expect(res.body.email).toEqual('<replace this to BD information>')
+    expect(res.body.name).toEqual('<replace>')
+    expect(res.body.email).toEqual('<replace>')
     expect(res.statusCode).toBe(200)
   })
   test('PUT for "/putUser/:id" route', async () => {
