@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 import app from '../src/app.js'
 import request from 'supertest'
-import { testUser } from './helpers.js'
+import { testUser } from './helpersTest.js'
 
 describe('test for undefined routes && protected routes', () => {
   test('should be response with a 404 status code', async () => {
