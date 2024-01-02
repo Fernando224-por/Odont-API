@@ -7,7 +7,10 @@ export const logIn = async (req, res) => {
   try {
     const userFound = await prisma.user.findUnique({
       where: {
-        emailUser: email
+        emailUser: email,
+        AND: {
+          state: 'ACTIVE'
+        }
       }
     })
     if (!userFound) {
@@ -23,7 +26,7 @@ export const logIn = async (req, res) => {
     }
     const token = await createAccessToken({
       id: userFound.idUser,
-      email: userFound.emailUser
+      role: userFound.role
     })
     res.cookie('token', token)
     res.json({

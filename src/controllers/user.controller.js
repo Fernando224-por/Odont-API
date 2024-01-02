@@ -61,9 +61,15 @@ export const getOneUser = async (req, res) => {
 export const deleteUser = async (req, res) => {
   try {
     const identifier = String(req.params.id)
-    const oldUser = await prisma.user.delete({
+    const oldUser = await prisma.user.update({
       where: {
-        idUser: identifier
+        idUser: identifier,
+        AND: {
+          state: 'ACTIVE'
+        }
+      },
+      data: {
+        state: 'INACTIVE'
       }
     })
     res.json({
@@ -83,7 +89,10 @@ export const updateUser = async (req, res) => {
     const test = String(req.params.id)
     const userFound = await prisma.user.findFirst({
       where: {
-        idUser: test
+        idUser: test,
+        AND: {
+          state: 'ACTIVE'
+        }
       }
     })
     if (!userFound) {
