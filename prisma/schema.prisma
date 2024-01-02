@@ -15,4 +15,11 @@ model user {
   emailUser    String   @unique(map: "User_emailUser_key")
   passwordUser String
   createdAt    DateTime @default(now())
+  role         Role     @default(PACIENTE)
+}
+
+enum Role {
+  PACIENTE
+  ODONTOLOGO
+  ADMINISTRADOR
 }

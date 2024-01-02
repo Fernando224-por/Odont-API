@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll"
+    "test": "set NODE_OPTIONS=--experimental-vm-modules && jest --watchAll",
+    "migrate:save": "npx prisma migrate dev --name"
   },
   "keywords": [],
   "author": "",
