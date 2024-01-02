@@ -25,13 +25,13 @@ DATABASE_URL = "mysql://USER:PASSWORD@HOST:PORT/DATABASE"
 
 Abre una terminal ubicada en el directorio del proyecto en donde ejecutes el siguiente comando
 ```bash
-npx prisma migrate save --name "[Nombre de la migración]"
+npm run migrate:save
 ```
-esto generara un archivo que aun no se sincroniza con la base de datos, para sincronizar la ejecución escribe este comando
+Esto generara un folder dentro de prisma llamado **migrations** donde dentro aparecera la migracion junto con un nombre por ultimo, para actualizar el archivo prisma.schema ejecuta este comando
 ```bash
-npx prisma migrate up
+npx prisma db pull
 ```
-esto hara que la migracion se ejecute y se refleje en la base de datos.
+esto "linteara", el codigo de los modelos y especificara aun mas los datos que se migran a la base de datos
 
 > [!TIP]
 > Si haz realizado cambios en los modelos dentro del archivo **schema.primsa**, debes ejecutar el mismo proceso
