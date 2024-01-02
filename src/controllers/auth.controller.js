@@ -23,8 +23,7 @@ export const logIn = async (req, res) => {
     }
     const token = await createAccessToken({
       id: userFound.idUser,
-      name: userFound.nameUser,
-      phone: userFound.phoneUser
+      email: userFound.emailUser
     })
     res.cookie('token', token)
     res.json({
