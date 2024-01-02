@@ -1,18 +1,18 @@
 export const testUser = {
-  email: 'Arjona7584@gmail.com',
+  email: 'test1@gmail.com',
   password: '123456789'
 }
 
 export const registerNewUser = {
-  numDocument: 1624587462,
-  name: 'Ricardo',
+  numDocument: 12345678910,
+  name: 'test1',
   phone: '3142960599',
-  email: 'felipao6578@gmail.com',
-  password: '123456789'
+  email: 'test1@gmail.com',
+  password: 'testNew123456'
 }
 
 export const updateOneUser = {
-  name: 'Pepe',
-  email: 'itohjenig85@gmail.com',
-  phone: '3212946031'
+  name: 'testChange',
+  email: 'testChange@gmail.com',
+  phone: '1658874895'
 }
