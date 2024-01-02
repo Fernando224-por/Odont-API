@@ -16,10 +16,16 @@ model user {
   passwordUser String
   createdAt    DateTime @default(now())
   role         Role     @default(PACIENTE)
+  state        Status   @default(ACTIVE)
 }
 
 enum Role {
   PACIENTE
   ODONTOLOGO
   ADMINISTRADOR
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
