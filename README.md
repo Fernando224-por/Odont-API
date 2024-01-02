@@ -52,6 +52,42 @@ esto "linteara", el codigo de los modelos y especificara aun mas los datos que s
 >    ```
 >   - Finalmente vuelve a instalar las dependecias del proyecto y ejecuta la migracion nuevamente
 
+## Creación de Test 
+Dentro del folder **Test** debes crear un archivo con la extencion **.test.js**.
+
+creado el archivo debes importar la constante **app** del archivo **app.js** y la clase **request** de la libreria **Supertest**
+```JS
+import app from '../src/app.js'
+import request from 'supertest'
+```
+
+la estructura basica de un test es la siguiente:
++ **describe** indica de forma general lo que se testeara
++ **test** describe la caracteristica a probar
++ **request** se usa para realizar las peticiones HTTP basandose en una aplicacion de Express
++ **expect** es la respuesta que resive de la peticion
++ los metodos **toBe**, **toEqual** y demas, son la respuesta que nosotros esperamos que sea 
+```JS
+describe('Basic test', () => {
+  test('description of the feature to be tested', async () => {
+    const res = await request(app).get('/').send()
+    expect(res.body.message).toEqual('Route not found')
+    expect(res.statusCode).toBe(404)
+  })
+})
+```
+
+para ejecutar el test, ejecuta este comando en la terminal
+```bash
+npm run test
+```
+si solo deseas ejecutar solo un **test suite** debes:
++ ejecuta el comando de test en la terminal
++ pulsa la tecla w y dentro del menu **watch usage** pulsa la tecla p
++ pon dentro el **nombre del test suit o del archivo de test** que pretendes utilizar
+
+Ya con testo podras ejecutar un solo **test suite**
+
 ## Ejecutar la API
 
 Por ultimo para poder ejecutar y poder probrar la API, escribe este comando en la terminal
