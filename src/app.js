@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
 import { FRONT_URL } from './config.js'
 import userRoutes from './routes/users.routes.js'
+import bookRoutes from './routes/book.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
 const app = express()
@@ -18,8 +19,9 @@ app.use(cors({
 }))
 app.use(cookieParser())
 
-app.use('/api', userRoutes)
 app.use('/api', authRoutes)
+app.use('/api', userRoutes)
+app.use('/api', bookRoutes)
 
 app.use((req, res, next) => {
   res.status(404).json({
