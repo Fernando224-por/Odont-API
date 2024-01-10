@@ -19,6 +19,15 @@ model user {
   state        Status   @default(ACTIVE)
 }
 
+model book {
+  idBook    Int      @id @default(autoincrement())
+  dentistId Int
+  createAt  DateTime @default(now())
+  state     Status   @default(ACTIVE)
+
+  @@index([dentistId], map: "book_dentistId_fkey")
+}
+
 enum Role {
   PACIENTE
   ODONTOLOGO
