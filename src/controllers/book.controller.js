@@ -44,6 +44,31 @@ export const getAllBooks = async (req, res) => {
   }
 }
 
+export const getDoctorBooks = async (req, res) => {
+  try {
+    const odontBook = await prisma.book.findMany({
+      where: {
+        dentistId: req.user.numDoc
+      }
+    })
+    if (!odontBook) {
+      return res.status(404).json({
+        message: 'User not Found'
+      })
+    }
+    if (odontBook.length === 0) {
+      return res.status(404).json({
+        message: 'This Dentist dont have Books yet'
+      })
+    }
+    res.json(odontBook)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'Something goes wrong'
+    })
+  }
+}
+
 export const getOneBook = async (req, res) => {
   try {
     const identifier = Number(req.params.id)
@@ -56,6 +81,47 @@ export const getOneBook = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: 'Something goes wrong'
+    })
+  }
+}
+
+export const deleteBook = async (req, res) => {
+  try {
+    const { book } = req.body
+    const oldBook = await prisma.book.update({
+      where: {
+        idBook: book
+      },
+      data: {
+        state: 'INACTIVE'
+      }
+    })
+    res.json(oldBook)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'someting goes wrong'
+    })
+  }
+}
+
+export const updateBook = async (req, res) => {
+  try {
+    const { book, doctorAssigment } = req.body
+    const dataUpdate = await prisma.book.update({
+      where: {
+        idBook: book,
+        AND: {
+          state: 'ACTIVE'
+        }
+      },
+      data: {
+        dentistId: doctorAssigment
+      }
+    })
+    res.json(dataUpdate)
+  } catch (error) {
+    return res.status(500).json({
+      message: 'someting goes wrong'
     })
   }
 }
