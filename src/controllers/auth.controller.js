@@ -26,7 +26,8 @@ export const logIn = async (req, res) => {
     }
     const token = await createAccessToken({
       id: userFound.idUser,
-      role: userFound.role
+      role: userFound.role,
+      numDoc: userFound.docUser
     })
     res.cookie('token', token)
     res.json({
@@ -46,16 +47,4 @@ export const logOut = async (req, res) => {
     expires: new Date(0)
   })
   return res.sendStatus(200)
-}
-
-export const protectedRoute = async (req, res) => {
-  try {
-    res.json({
-      message: 'hola'
-    })
-  } catch (error) {
-    return res.status(400).json({
-      message: 'Something goes wrong'
-    })
-  }
 }
