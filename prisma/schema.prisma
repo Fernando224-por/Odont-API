@@ -22,11 +22,11 @@ model user {
 model book {
   idBook     Int      @id @default(autoincrement())
   dentistId  Int
-  createAt   DateTime @default(now())
-  state      Status   @default(ACTIVE)
   endMonth   String   @db.VarChar(20)
   startMonth String   @db.VarChar(20)
   year       Int      @db.Year
+  createAt   DateTime @default(now())
+  state      Status   @default(ACTIVE)
 
   @@index([dentistId], map: "book_dentistId_fkey")
 }
