@@ -1,7 +1,8 @@
 import { Router } from 'express'
 import { newBookSchema } from '../schemas/book.schema.js'
 import { validateSchema } from '../middlewares/validator.middleware.js'
-import { authRequired, adminRequired } from '../middlewares/validateToken.middleware.js'
+import { authRequired } from '../middlewares/validateToken.middleware.js'
+import { adminRequired } from '../middlewares/validateRole.middleware.js'
 import { newBook, getAllBooks, getOneBook } from '../controllers/book.controller.js'
 const router = Router()
 
