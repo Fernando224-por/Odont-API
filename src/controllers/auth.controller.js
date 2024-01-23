@@ -1,6 +1,8 @@
 import { prisma } from '../db.js'
 import bcrypt from 'bcryptjs'
 import { createAccessToken } from '../libs/jwt.js'
+import jwt from 'jsonwebtoken'
+import { JWT_KEY } from '../config.js'
 
 export const logIn = async (req, res) => {
   const { email, password } = req.body
@@ -47,4 +49,24 @@ export const logOut = async (req, res) => {
     expires: new Date(0)
   })
   return res.sendStatus(200)
+}
+
+export const verifyToken = async (req, res) => {
+  const { token } = req.cookies
+  if (!token) return res.status(401).json({ message: 'Unauthorized' })
+  jwt.verify(token, JWT_KEY, async (error, user) => {
+    if (error) return res.status(401).json({ message: 'Unauthorized' })
+
+    const userFound = await prisma.user.findFirst({
+      where: {
+        idUser: user.id
+      }
+    })
+    if (!userFound) return res.status(401).json({ message: 'Unauthorized' })
+
+    return res.json({
+      id: userFound.idUser,
+      name: userFound.nameUser
+    })
+  })
 }
