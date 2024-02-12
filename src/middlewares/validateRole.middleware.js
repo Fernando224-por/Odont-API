@@ -5,9 +5,11 @@ export const adminRequired = (req, res, next) => {
     const { token } = req.cookies
     const decodeToken = jwt.decode(token)
     const role = decodeToken.role
+    console.log(role)
     if (role !== 'ADMINISTRADOR') {
       return res.status(401).json({
-        message: 'authorization denied!'
+        message: 'authorization denied!',
+        rol: role
       })
     }
     next()

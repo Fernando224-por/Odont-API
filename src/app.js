@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser'
 import { FRONT_URL } from './config.js'
 import userRoutes from './routes/users.routes.js'
 import bookRoutes from './routes/book.routes.js'
+import dateRoutes from './routes/date.routes.js'
 import authRoutes from './routes/auth.routes.js'
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(cookieParser())
 app.use('/api', authRoutes)
 app.use('/api', userRoutes)
 app.use('/api', bookRoutes)
+app.use('/api', dateRoutes)
 
 app.use((req, res, next) => {
   res.status(404).json({

@@ -31,6 +31,18 @@ model book {
   @@index([dentistId], map: "book_dentistId_fkey")
 }
 
+model meeting {
+  idDate   String     @id @unique
+  idBook   Int
+  idUser   Int
+  dateHour String
+  state    StatusDate @default(PENDING)
+  createAt DateTime   @default(now())
+
+  @@index([idBook], map: "date_idBook_fkey")
+  @@index([idUser], map: "date_idUser_fkey")
+}
+
 enum Role {
   PACIENTE
   ODONTOLOGO
@@ -40,4 +52,9 @@ enum Role {
 enum Status {
   ACTIVE
   INACTIVE
+}
+
+enum StatusDate {
+  PENDING
+  ATTENDED
 }
